@@ -1,27 +1,30 @@
 import os
-
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Meu site")
+# Configuração da porta dinâmica do Heroku
+port = int(os.environ.get("PORT", 5000))
+st.set_option('server.port', port)
 
+# Configuração da página do Streamlit
+st.set_page_config(page_title="Meu Aplicativo Streamlit", layout="wide")
 
+# Função para carregar dados (exemplo)
 @st.cache
 def carregar_dados():
-    try:
-        dados = pd.read_csv("resultados.csv")
-        return dados
-    except FileNotFoundError:
-        st.error("Arquivo 'resultados.csv' não encontrado.")
-        return None
-    except pd.errors.EmptyDataError:
-        st.error("O arquivo 'resultados.csv' está vazio.")
-        return None
-    except pd.errors.ParserError:
-        st.error("Erro ao processar 'resultados.csv'. Verifique o formato dos dados.")
-        return None
+    dados = pd.read_csv("dados.csv")
+    return dados
 
+# Corpo principal do aplicativo Streamlit
+st.title('Meu Aplicativo Streamlit')
+st.write('Hello world!')
 
+# Exemplo de uso de dados carregados
+dados = carregar_dados()
+if dados is not None:
+    st.write(dados.head())
+
+# Containers adicionais
 with st.container():
     st.title("Dashboard Contratos")
     st.write("Hello **world**!")
@@ -37,10 +40,3 @@ with st.container():
     if dados is not None:
         dados = dados[-num_dias:]
         st.area_chart(dados, x="Data", y="Contratos")
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    st.set_option('server.port', port)
-    st.set_page_config(layout="wide")
-    st.title('Meu aplicativo Streamlit')
-    st.write('Hello world!')
