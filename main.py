@@ -2,10 +2,6 @@ import os
 import streamlit as st
 import pandas as pd
 
-# Configuração da porta dinâmica do Heroku
-port = int(os.environ.get("PORT", 5000))
-st.set_option('server.port', port)
-
 # Configuração da página do Streamlit
 st.set_page_config(page_title="Meu Aplicativo Streamlit", layout="wide")
 
