@@ -12,7 +12,6 @@ def carregar_dados():
 
 # Corpo principal do aplicativo Streamlit
 st.title('Meu Aplicativo')
-st.write('Hello world!')
 
 # Exemplo de uso de dados carregados
 dados = carregar_dados()
@@ -22,8 +21,7 @@ if dados is not None:
 # Containers adicionais
 with st.container():
     st.title("Dashboard Contratos")
-    st.write("Hello **world**!")
-    st.write("Mês de Janeiro")
+    st.write("**Mês de Janeiro**")
     st.write("[Link](https://www.google.com.br/)")
     st.write("---")
 
